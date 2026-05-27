@@ -1,0 +1,36 @@
+name: Harnexis Build & Release Pipelines
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+
+jobs:
+  validate-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js Context
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+
+    - name: Install Node Packages
+      run: npm ci
+
+    - name: Validate Types & Lint
+      run: npm run lint
+
+    - name: Prepare Local Database Schemas
+      run: npx prisma generate
+
+    - name: Compile Full-Stack Artifacts
+      run: npm run build
+
+    - name: Run Unit and Integration Tests
+      run: npm run test

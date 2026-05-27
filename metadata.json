@@ -1,0 +1,6 @@
+{
+  "name": "Hanexis",
+  "description": "AI-driven social media lead generation, outreach personalization, and content scheduling system with advanced CRM analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
